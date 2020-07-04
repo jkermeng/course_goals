@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Association_Graduation_RequirementsMapper">
+    <resultMap id="agr" type="Association_Graduation_Requirements">
+        <id property="tagr_id" column="tagr_id"></id>
+        <result property="tagr_title" column="tagr_title"></result>
+        <result property="tagr_describe" column="tagr_describe"></result>
+    </resultMap>
+    <sql id="allValue">
+        tagr_id,tagr_title,tagr_describe
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <select id="selectAll" resultMap="agr">
+        select
+        <include refid="allValue"/>
+        from table_association_graduation_requirements
+    </select>
+    <!--    <select id="selectOneByKey" parameterType="" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_association_graduation_requirements-->
+    <!--        <where>-->
+    <!--            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>-->
+    <!--            <if test="u_id!=null and u_id!=''">,u_id=#{u_id}</if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+        <select id="selectsByKey" parameterType="Association_Graduation_Requirements" resultMap="agr">
+            select
+            <include refid="allValue"/>
+            from table_association_graduation_requirements
+            <where>
+                <if test="tagr_id!=null and tagr_id!=''">tagr_id=#{tagr_id}</if>
+                <if test="tagr_titlenull and tagr_title!=''">,tagr_title=#{tagr_title}</if>
+                <if test="tagr_describe and tagr_describe!=''">,tagr_describe=#{tagr_describe}</if>
+            </where>
+        </select>
+        <select id="selectById" resultMap="agr">
+            select
+            <include refid="allValue"/>
+            from table_association_graduation_requirements
+            where  tagr_id=#{tagr_id}
+        </select>
+    <!--    <update id="update" parameterType="">-->
+    <!--        update table_association_graduation_requirements-->
+    <!--        <set>-->
+    <!--            <if test=" !=null and  !=''">xxx=#{}</if>-->
+    <!--            <if test=" !=null and  !=''">,xxx=#{}</if>-->
+
+    <!--        </set>-->
+    <!--        where-->
+    <!--    </update>-->
+    <!--    <delete id="delete" parameterType="">-->
+    <!--        delete-->
+    <!--        from table_association_graduation_requirements-->
+    <!--        where-->
+    <!--    </delete>-->
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_association_graduation_requirements-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <!--    <insert id="insert" parameterType="">-->
+    <!--        insert into table_association_graduation_requirements()-->
+    <!--        values (-->
+    <!--        <if test=" !=null and !=''">#{xxx}</if>-->
+    <!--        <if test=" !=null and !=''">,#{xxx}</if>-->
+    <!--        )-->
+    <!--    </insert>-->
+</mapper>

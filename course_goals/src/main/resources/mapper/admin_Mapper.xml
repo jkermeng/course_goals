@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--需要修改namespace的接口-->
+<mapper namespace="cn.jk.demo.mapper.AdminMapper">
+    <!--    根据用户需求增加或减少属性-->
+    <resultMap id="admin" type="Admin">
+        <id property="Id" column="Id"></id>
+        <result property="Name" column="Name"></result>
+        <result property="Rname" column="Rname"></result>
+        <result property="Password" column="Password"></result>
+        <result property="Age" column="Age"></result>
+        <result property="Birthday" column="Birthday"></result>
+        <result property="Email" column="Email"></result>
+        <result property="Tel" column="Tel"></result>
+        <result property="PersonID" column="PersonID"></result>
+        <result property="Picture" column="Picture"></result>
+        <result property="State" column="State"></result>
+        <result property="CreateTime" column="CreateTime"></result>
+        <result property="UpdateTime" column="UpdateTime"></result>
+        <association property="Role" column="Role" select="cn.jk.demo.mapper.RoleMapper.selectById"
+                     javaType="Role"></association>
+    </resultMap>
+    <sql id="allValue">
+        Id,Name,Rname,Password,Age,Birthday,Email,Tel,PersonID,Picture,State,CreateTime,UpdateTime,Role
+    </sql>
+    <sql id="addValue">
+        Name,Rname,Password,Age,Birthday,Email,Tel,PersonID,Picture,State,CreateTime,UpdateTime,Role
+    </sql>
+    <select id="selectAll" resultMap="admin">
+        select
+        <include refid="allValue"/>
+        from table_admin
+    </select>
+
+    <select id="selectOneByKey" resultMap="admin" parameterType="Admin">
+        select
+        <include refid="allValue"/>
+        from table_admin
+        <where>
+            <if test="Name!=null and Name!=''">Name = #{Name}</if>
+            <if test="Rname!=null and Rname!=''">and Rname = #{Rname}</if>
+            <if test="Password!=null and Password!=''">and Password = #{Password}</if>
+            <if test="Age!=null and Age!=''">and Age = #{Age}</if>
+            <if test="Birthday!=null and Birthday!=''">and Birthday = #{Birthday}</if>
+            <if test="Email!=null and Email!=''">and Email = #{Email}</if>
+            <if test="Tel!=null and Tel!=''">and Tel = #{Tel}</if>
+            <if test="PersonID!=null and PersonID!=''">and PersonID = #{PersonID}</if>
+            <if test="Picture!=null and Picture!=''">and Picture = #{Picture}</if>
+            <if test="State!=null and State!=''">and State = #{State}</if>
+            <if test="CreateTime!=null and CreateTime!=''">and CreateTime = #{CreateTime}</if>
+            <if test="UpdateTime!=null and UpdateTime!=''">and UpdateTime = #{UpdateTime}</if>
+        </where>
+    </select>
+</mapper>

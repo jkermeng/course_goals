@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Test_KP_IPMapper">
+    <resultMap id="tkpip" type="Test_KP_IP">
+        <id property="ttkp_test_ip" column="ttkp_test_ip"></id>
+        <result property="ttkp_kp" column="ttkp_kp"></result>
+        <result property="ttkp_ip" column="ttkp_ip"></result>
+        <result property="ttkp_weight" column="ttkp_weight"></result>
+    </resultMap>
+    <sql id="allValue">
+        ttkp_test_ip,ttkp_kp,ttkp_ip,ttkp_weight
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <!--    <select id="selectAll" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_index_points-->
+    <!--    </select>-->
+    <select id="selectOneByKey" parameterType="Test_KP_IP" resultMap="tkpip">
+        select
+        <include refid="allValue"/>
+        from table_index_points
+        <where>
+            <if test="ttkp_test_ip!=null and ttkp_test_ip!=''">ttkp_test_ip=#{ttkp_test_ip}</if>
+            <if test="ttkp_kp!=null and ttkp_kp!=''">and ttkp_kp=#{ttkp_kp}</if>
+            <if test="ttkp_ip!=null and ttkp_ip!=''">
+                <if test="ttkp_test_ip!=null and ttkp_test_ip!=''">and</if>
+                ttkp_ip=#{ttkp_ip}
+            </if>
+            <if test="ttkp_weight!=null and ttkp_weight!=''">and ttkp_weight=#{ttkp_weight}</if>
+        </where>
+    </select>
+    <select id="selectsByKey" parameterType="Test_KP_IP" resultMap="tkpip">
+        select
+        <include refid="allValue"/>
+        from table_index_points
+        <where>
+            <if test="ttkp_test_ip!=null and ttkp_test_ip!=''">ttkp_test_ip=#{ttkp_test_ip}</if>
+            <if test="ttkp_kp!=null and ttkp_kp!=''">and ttkp_kp=#{ttkp_kp}</if>
+            <if test="ttkp_ip!=null and ttkp_ip!=''">and ttkp_ip=#{ttkp_ip}</if>
+            <if test="ttkp_weight!=null and ttkp_weight!=''">and ttkp_weight=#{ttkp_weight}</if>
+        </where>
+    </select>
+    <select id="selectById" resultMap="tkpip">
+        select
+        <include refid="allValue"/>
+        from table_index_points
+        where ttkp_test_ip=#{ttkp_test_ip}
+    </select>
+    <!--    <update id="update" parameterType="">-->
+    <!--        update table_index_points-->
+    <!--        <set>-->
+    <!--            <if test=" !=null and  !=''">xxx=#{}</if>-->
+    <!--            <if test=" !=null and  !=''">,xxx=#{}</if>-->
+
+    <!--        </set>-->
+    <!--        where-->
+    <!--    </update>-->
+    <delete id="delete" parameterType="Test_KP_IP">
+        delete
+        from table_test_kp_ip
+        where
+        <if test="ttkp_test_ip!=null and ttkp_test_ip!=''">ttkp_test_ip = #{ttkp_test_ip}</if>
+        <if test="ttkp_kp!=null and ttkp_kp!=''">ttkp_kp=#{ttkp_kp}</if>
+        <if test="ttkp_ip!=null and ttkp_ip!=''">ttkp_ip=#{ttkp_ip}</if>
+        <if test="ttkp_weight!=null and ttkp_weight!=''">ttkp_weight=#{ttkp_weight}</if>
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_index_points-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <!--    <insert id="insert" parameterType="">-->
+    <!--        insert into table_index_points()-->
+    <!--        values (-->
+    <!--        <if test=" !=null and !=''">#{xxx}</if>-->
+    <!--        <if test=" !=null and !=''">,#{xxx}</if>-->
+    <!--        )-->
+    <!--    </insert>-->
+</mapper>

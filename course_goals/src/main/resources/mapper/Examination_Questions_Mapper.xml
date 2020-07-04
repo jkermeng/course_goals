@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Examination_QuestionsMapper">
+    <resultMap id="eq" type="Examination_Questions">
+        <id property="teq_id" column="teq_id"></id>
+        <result property="teq_name" column="teq_name"></result>
+        <result property="teq_score" column="teq_score"></result>
+        <result property="teq_describe" column="teq_describe"></result>
+        <association property="teq_test_id" column="teq_test_id" select="cn.jk.demo.mapper.TestMapper.selectById"
+                     javaType="Test"></association>
+    </resultMap>
+    <resultMap id="eqkp" type="Examination_Questions_Know_Point">
+        <id property="teqkp_id" column="teqkp_id"></id>
+        <association property="teqkp_eq_id" column="teqkp_eq_id"
+                     select="cn.jk.demo.mapper.Examination_QuestionsMapper.selectById"
+                     javaType="Examination_Questions"></association>
+        <association property="teqkp_kp_id" column="teqkp_kp_id"
+                     select="cn.jk.demo.mapper.Knowledge_PointsMapper.selectById"
+                     javaType="Knowledge_Points"></association>
+    </resultMap>
+    <sql id="allValue">
+        teq_id,teq_name,teq_score,teq_describe,teq_test_id
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <!--    <select id="selectAll" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_examination_questions-->
+    <!--    </select>-->
+    <select id="selectOneByKey" parameterType="Examination_Questions" resultMap="eq">
+        select
+        <include refid="allValue"/>
+        from table_examination_questions
+        <where>
+            <if test="teq_id!=null and teq_id!=''">teq_id=#{teq_id}</if>
+            <if test="teq_name!=null and teq_name!=''">
+                <if test="teq_id!=null and teq_id!=''">and</if>
+                teq_name=#{teq_name}
+            </if>
+            <if test="teq_score!=null and teq_score!=''">and teq_score=#{teq_score}</if>
+            <if test="teq_describe!=null and teq_describe!=''">and teq_describe=#{teq_describe}</if>
+            <if test="teq_test_id!=null and teq_test_id!=''">and teq_test_id=#{teq_test_id.tt_id}</if>
+        </where>
+    </select>
+    <select id="selectOneByTest_id" resultMap="eq">
+        select
+        <include refid="allValue"/>
+        from table_examination_questions
+        where teq_test_id=#{id}
+    </select>
+    <select id="selectsByKey" parameterType="Examination_Questions" resultMap="eq">
+        select
+        <include refid="allValue"/>
+        from table_examination_questions
+        <where>
+            <if test="teq_id!=null and teq_id!=''">teq_id=#{teq_id}</if>
+            <if test="teq_name!=null and teq_name!=''">
+                <if test="teq_id!=null and teq_id!=''">and</if>
+                teq_name=#{teq_name}
+            </if>
+            <if test="teq_score!=null and teq_score!=''">and teq_score=#{teq_score}</if>
+            <if test="teq_describe!=null and teq_describe!=''">and teq_describe=#{teq_describe}</if>
+            <if test="teq_test_id!=null and teq_test_id!=''">and teq_test_id=#{teq_test_id.tt_id}</if>
+        </where>
+    </select>
+    <select id="selectById" resultMap="eq">
+        select
+        <include refid="allValue"/>
+        from table_examination_questions
+        where teq_id=#{teq_id}
+    </select>
+    <update id="update" parameterType="Examination_Questions">
+        update table_examination_questions
+        <set>
+            <if test=" teq_id!=null and  teq_id!=''">teq_id=#{teq_id}</if>
+            <if test=" teq_name!=null and  teq_name!=''">,teq_name=#{teq_name}</if>
+            <if test=" teq_score!=null and  teq_score!=''">,teq_score=#{teq_score}</if>
+        </set>
+        where teq_id=#{teq_id}
+    </update>
+    <delete id="delete" parameterType="Examination_Questions">
+        DELETE t1,t2
+        FROM table_examination_questions t1
+                 LEFT JOIN table_eq_kp t2 ON t1.`teq_id` = t2.`teqkp_eq_id`
+        WHERE t1.`teq_id` = #{teq_id}
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_examination_questions-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="Examination_Questions">
+        insert into table_examination_questions(
+        <if test="teq_name!=null and teq_name!=''">teq_name</if>
+        <if test="teq_score!=null and teq_score!=''">,teq_score</if>
+        <if test="teq_describe!=null and teq_describe!=''">,teq_describe</if>
+        <if test="teq_test_id!=null and teq_test_id!=''">,teq_test_id</if>)
+        values (
+        <if test="teq_name!=null and teq_name!=''">#{teq_name}</if>
+        <if test="teq_score!=null and teq_score!=''">,#{teq_score}</if>
+        <if test="teq_describe!=null and teq_describe!=''">,#{teq_describe}</if>
+        <if test="teq_test_id!=null and teq_test_id!=''">,#{teq_test_id.tt_id}</if>
+        )
+    </insert>
+    <insert id="insertEQ_KP" parameterType="Examination_Questions_Know_Point">
+        insert into table_eq_kp (teqkp_eq_id, teqkp_kp_id)
+        values (#{teqkp_eq_id.teq_id}, #{teqkp_kp_id.tkp_id})
+    </insert>
+    <select id="selectEq_Kp" parameterType="Examination_Questions_Know_Point" resultMap="eqkp">
+        select *
+        from table_eq_kp
+        <where>
+            <if test="teqkp_id!=null and teqkp_id!=''">teqkp_id=#{teqkp_id}</if>
+            <if test="teqkp_eq_id!=null and teqkp_eq_id!=''">teqkp_eq_id=#{teqkp_eq_id.teq_id}</if>
+            <if test="teqkp_kp_id!=null and teqkp_kp_id!=''">teqkp_kp_id=#{teqkp_kp_id.tkp_id}</if>
+        </where>
+    </select>
+    <select id="selectEq_Kp2" parameterType="Examination_Questions_Know_Point" resultMap="eqkp">
+        select *
+        from table_eq_kp
+        <where>
+            <if test="teqkp_eq_id!=null and teqkp_eq_id!=''">teqkp_eq_id=#{teqkp_eq_id.teq_id}</if>
+            <if test="teqkp_kp_id!=null and teqkp_kp_id!=''">and teqkp_kp_id=#{teqkp_kp_id.tkp_id}</if>
+        </where>
+    </select>
+    <delete id="delExamination_Questions_Know_Point" parameterType="Examination_Questions_Know_Point">
+        delete
+        from table_eq_kp
+        where teqkp_eq_id = #{teqkp_eq_id.teq_id}
+          and teqkp_kp_id = #{teqkp_kp_id.tkp_id}
+    </delete>
+</mapper>

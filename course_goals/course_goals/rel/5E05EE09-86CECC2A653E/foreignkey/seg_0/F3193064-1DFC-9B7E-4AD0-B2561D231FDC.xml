@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="F3193064-1DFC-9B7E-4AD0-B2561D231FDC" containerWithKeyObject="96DC24CA-F931-FA48-3DED-7D80DE483E19" localFKIndex="75FE0303-2C20-5346-6492-03E871942A66" name="table_ass_major_table_major_graduation_requirements_FK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>14A390C1-AE9B-F40A-1E8D-7A49BD712A50</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<referredTableLongName>table_major_graduation_requirements</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A78D63AF-C16B-8F1F-9E05-FFFCC418741F</referredTableID>
+<keyObject>97F88D7D-0635-BD33-051D-B4EA56C701F8</keyObject>
+<referredKeyID>97F88D7D-0635-BD33-051D-B4EA56C701F8</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>tmgr_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

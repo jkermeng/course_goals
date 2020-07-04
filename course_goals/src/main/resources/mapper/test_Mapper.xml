@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.TestMapper">
+    <resultMap id="test" type="Test">
+        <id property="tt_id" column="tt_id"></id>
+        <result property="tt_name" column="tt_name"></result>
+        <result property="tt_name" column="tt_name"></result>
+        <result property="tt_name" column="tt_name"></result>
+        <result property="tt_name" column="tt_name"></result>
+        <result property="tt_reach" column="tt_reach"></result>
+        <association property="tt_teacher" column="tt_teacher" select="cn.jk.demo.mapper.UserMapper.selectById"
+                     javaType="User"></association>
+        <association property="tt_course" column="tt_course" select="cn.jk.demo.mapper.CourseMapper.selectById"
+                     javaType="Course"></association>
+    </resultMap>
+    <sql id="allValue">
+        tt_id,tt_name,tt_teacher,tt_CreateTime,tt_UpdateTime,tt_status,tt_course,tt_reach
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <select id="selectAll" resultMap="test">
+        select
+        <include refid="allValue"/>
+        from table_test
+    </select>
+    <select id="selectOneByKey" parameterType="Test" resultMap="test">
+        select
+        <include refid="allValue"/>
+        from table_test
+        <where>
+            <if test="tt_id!=null and tt_id!=''">tt_id=#{tt_id}</if>
+            <if test="tt_name!=null and tt_name!=''">
+                <if test="tt_id!=null and tt_id!=''">and</if>
+                tt_name=#{tt_name}
+            </if>
+            <if test="tt_teacher!=null and tt_teacher!=''">and tt_teacher=#{tt_teacher.u_id}</if>
+            <if test="tt_CreateTime!=null">and tt_CreateTime=#{tt_CreateTime}</if>
+            <if test="tt_UpdateTime!=null">and tt_UpdateTime=#{tt_UpdateTime}</if>
+            <if test="tt_status!=null and tt_status!=''">and tt_status=#{tt_status}</if>
+            <if test="tt_course!=null and tt_course!=''">
+                <if test="tt_id!=null and tt_id!=''">and</if>
+                tt_course=#{tt_course.tc_id}
+            </if>
+            <if test="tt_reach!=null and tt_reach!=''">and tt_reach=#{tt_reach}</if>
+        </where>
+    </select>
+    <select id="selectsByKey" parameterType="Test" resultMap="test">
+        select
+        <include refid="allValue"/>
+        from table_test
+        <where>
+            <if test="tt_id!=null and tt_id!=''">tt_id=#{tt_id}</if>
+            <if test="tt_name!=null and tt_name!=''">and tt_name=#{tt_name}</if>
+            <if test="tt_teacher!=null and tt_teacher!=''">and tt_teacher=#{tt_teacher.u_id}</if>
+            <if test="tt_CreateTime!=null">and tt_CreateTime=#{tt_CreateTime}</if>
+            <if test="tt_UpdateTime!=null">and tt_UpdateTime=#{tt_UpdateTime}</if>
+            <if test="tt_status!=null and tt_status!=''">and tt_status=#{tt_status}</if>
+            <if test="tt_course!=null and tt_course!=''">
+                <if test="tt_id!=null and tt_id!=''">and</if>
+                tt_course=#{tt_course.tc_id}
+            </if>
+            <if test="tt_reach!=null and tt_reach!=''">and tt_reach=#{tt_reach}</if>
+        </where>
+    </select>
+    <select id="selectById" resultMap="test">
+        select
+        <include refid="allValue"/>
+        from table_test
+        where tt_id=#{tt_id}
+    </select>
+    <update id="update" parameterType="Test">
+        update table_test
+        <set>
+            <if test="tt_id!=null and tt_id!=''">tt_id=#{tt_id}</if>
+            <if test="tt_name!=null and tt_name!=''">,tt_name=#{tt_name}</if>
+            <if test="tt_teacher!=null and tt_teacher!=''">,tt_teacher=#{tt_teacher.u_id}</if>
+            <if test="tt_CreateTime!=null">,tt_CreateTime=#{tt_CreateTime}</if>
+            <if test="tt_UpdateTime!=null">,tt_UpdateTime=#{tt_UpdateTime}</if>
+            <if test="tt_status!=null and tt_status!=''">,tt_status=#{tt_status}</if>
+            <if test="tt_course!=null and tt_course!=''">,tt_course=#{tt_course.tc_id}</if>
+            <if test="tt_reach!=null and tt_reach!=''">, tt_reach=#{tt_reach}</if>
+
+        </set>
+        where tt_id=#{tt_id}
+    </update>
+    <delete id="delete" parameterType="Test">
+        delete
+        from table_test
+        where tt_id = #{tt_id}
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_test-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="Test">
+        insert into table_test(
+        <if test="tt_name!=null and tt_name!=''">tt_name</if>
+        <if test="tt_teacher!=null and tt_teacher!=''">,tt_teacher</if>
+        <if test="tt_CreateTime!=null">,tt_CreateTime</if>
+        <if test="tt_UpdateTime!=null">,tt_UpdateTime</if>
+        <if test="tt_status!=null and tt_status!=''">,tt_status</if>
+        <if test="tt_course!=null and tt_course!=''">,tt_course</if>
+        <if test="tt_reach!=null and tt_reach!=''">,tt_reach</if>
+        )
+        values (
+        <if test="tt_name!=null and tt_name!=''">#{tt_name}</if>
+        <if test="tt_teacher!=null and tt_teacher!=''">,#{tt_teacher.u_id}</if>
+        <if test="tt_CreateTime!=null">,#{tt_CreateTime}</if>
+        <if test="tt_UpdateTime!=null">,#{tt_UpdateTime}</if>
+        <if test="tt_status!=null and tt_status!=''">,#{tt_status}</if>
+        <if test="tt_course!=null and tt_course!=''">,#{tt_course.tc_id}</if>
+        <if test="tt_reach!=null and tt_reach!=''">, #{tt_reach}</if>
+
+        )
+    </insert>
+</mapper>

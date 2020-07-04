@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Ass_MajorMapper">
+    <resultMap id="am" type="Ass_Major">
+        <association property="table_major_graduation_requirements_tmgr_id"
+                     column="table_major_graduation_requirements_tmgr_id"
+                     select="cn.jk.demo.mapper.Major_graduation_requirementsMapper.selectById"
+                     javaType="Major_graduation_requirements"></association>
+        <association property="table_association_graduation_requirements_tagr_id"
+                     column="table_association_graduation_requirements_tagr_id"
+                     select="cn.jk.demo.mapper.Association_Graduation_RequirementsMapper.selectById"
+                     javaType="Association_Graduation_Requirements"></association>
+    </resultMap>
+    <sql id="allValue">
+        table_major_graduation_requirements_tmgr_id,table_association_graduation_requirements_tagr_id
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+        <select id="selectAll" resultMap="am" flushCache="true" >
+            select
+            <include refid="allValue"/>
+            from table_ass_major
+        </select>
+    <select id="selectAlls" resultMap="am">
+        select
+        <include refid="allValue"/>
+        from table_ass_major
+    </select>
+    <!--    <select id="selectOneByKey" parameterType="" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_ass_major-->
+    <!--        <where>-->
+    <!--            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>-->
+    <!--            <if test="u_id!=null and u_id!=''">,u_id=#{u_id}</if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <select id="selectsByKey" parameterType="Ass_Major" resultMap="am">
+        select
+        <include refid="allValue"/>
+        from table_ass_major
+        <where>
+            <if test="table_association_graduation_requirements_tagr_id!=null and table_association_graduation_requirements_tagr_id!=''">
+                table_association_graduation_requirements_tagr_id=#{table_association_graduation_requirements_tagr_id.tmgr_id}
+            </if>
+            <if test="table_association_graduation_requirements_tagr_id!=null and table_association_graduation_requirements_tagr_id!=''">
+                <if test="table_association_graduation_requirements_tagr_id!=null and table_association_graduation_requirements_tagr_id!=''">
+                    ,
+                </if>
+                table_association_graduation_requirements_tagr_id=#{table_association_graduation_requirements_tagr_id.tagr_id}
+            </if>
+        </where>
+    </select>
+    <!--        <select id="selectById" resultMap="">-->
+    <!--            select-->
+    <!--            <include refid="allValue"/>-->
+    <!--            from table_ass_major-->
+    <!--            where-->
+    <!--        </select>-->
+    <!--    <update id="update" parameterType="">-->
+    <!--        update table_ass_major-->
+    <!--        <set>-->
+    <!--            <if test=" !=null and  !=''">xxx=#{}</if>-->
+    <!--            <if test=" !=null and  !=''">,xxx=#{}</if>-->
+
+    <!--        </set>-->
+    <!--        where-->
+    <!--    </update>-->
+    <!--    <delete id="delete" parameterType="">-->
+    <!--        delete-->
+    <!--        from table_ass_major-->
+    <!--        where-->
+    <!--    </delete>-->
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_ass_major-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <!--    <insert id="insert" parameterType="">-->
+    <!--        insert into table_ass_major()-->
+    <!--        values (-->
+    <!--        <if test=" !=null and !=''">#{xxx}</if>-->
+    <!--        <if test=" !=null and !=''">,#{xxx}</if>-->
+    <!--        )-->
+    <!--    </insert>-->
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Major_graduation_requirementsMapper">
+    <resultMap id="mgr" type="Major_graduation_requirements">
+        <id property="tmgr_id" column="tmgr_id"></id>
+        <result property="tmgr_tile" column="tmgr_tile"></result>
+        <result property="tmgr_describe" column="tmgr_describe"></result>
+
+    </resultMap>
+    <sql id="allValue">
+        tmgr_id,tmgr_tile,tmgr_describe
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+        <select id="selectAll" resultMap="mgr">
+            select
+            <include refid="allValue"/>
+            from table_major_graduation_requirements
+        </select>
+    <!--    <select id="selectOneByKey" parameterType="" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_major_graduation_requirements-->
+    <!--        <where>-->
+    <!--            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>-->
+    <!--            <if test="u_id!=null and u_id!=''">,u_id=#{u_id}</if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <select id="selectsByKey" parameterType="Major_graduation_requirements" resultMap="mgr">
+        select
+        <include refid="allValue"/>
+        from table_major_graduation_requirements
+        <where>
+            <if test="tmgr_id!=null and tmgr_id!=''">tmgr_id=#{tmgr_id}</if>
+            <if test="tmgr_tile!=null and tmgr_tile!=''"><if test="tmgr_id!=null and tmgr_id!=''">and </if>tmgr_tile=#{tmgr_tile}
+            </if>
+            <if test="tmgr_describe!=null and tmgr_describe!=''">,tmgr_describe=#{tmgr_describe}</if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="mgr">
+        select
+        <include refid="allValue"/>
+        from table_major_graduation_requirements
+        where tmgr_id =#{id}
+    </select>
+    <!--    <update id="update" parameterType="">-->
+    <!--        update table_major_graduation_requirements-->
+    <!--        <set>-->
+    <!--            <if test=" !=null and  !=''">xxx=#{}</if>-->
+    <!--            <if test=" !=null and  !=''">,xxx=#{}</if>-->
+
+    <!--        </set>-->
+    <!--        where-->
+    <!--    </update>-->
+    <!--    <delete id="delete" parameterType="">-->
+    <!--        delete-->
+    <!--        from table_major_graduation_requirements-->
+    <!--        where-->
+    <!--    </delete>-->
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_major_graduation_requirements-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <!--    <insert id="insert" parameterType="">-->
+    <!--        insert into table_major_graduation_requirements()-->
+    <!--        values (-->
+    <!--        <if test=" !=null and !=''">#{xxx}</if>-->
+    <!--        <if test=" !=null and !=''">,#{xxx}</if>-->
+    <!--        )-->
+    <!--    </insert>-->
+</mapper>

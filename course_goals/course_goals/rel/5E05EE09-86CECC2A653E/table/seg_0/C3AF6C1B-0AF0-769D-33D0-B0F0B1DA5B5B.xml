@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C3AF6C1B-0AF0-769D-33D0-B0F0B1DA5B5B" name="table_association_graduation_requirements">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>9E8DA2C6-966A-9FB2-D75C-E80878EFED96</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="tagr_id" id="6221AB0C-510F-D7CD-F74D-CF1DA45C0341">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>70771AFF-6BAC-7320-0881-32BDD58AA934</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tagr_title" id="E56ED0FE-547C-A8B2-7DBC-0542DF2515F3">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>8160D772-7650-40CE-8345-271B1B308332</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tagr_describe" id="1B991D09-0AEE-267A-115F-1D5E46D8BFF4">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>E629231C-F96A-FBDD-C2DE-3B1028D81BEF</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="59C464F5-FBA9-F4C6-78B3-EEC6DCEDBB86" name="table_association_graduation_requirements_PK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>511D4660-8C0E-4F55-71BD-7F760F4C8438</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6221AB0C-510F-D7CD-F74D-CF1DA45C0341"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

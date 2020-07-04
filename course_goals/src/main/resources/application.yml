@@ -1,0 +1,56 @@
+#数据库连接
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/course?serverTimezone=UTC
+#    url: jdbc:mysql://localhost:3307/course?serverTimezone=UTC
+
+    username: root
+#    password: 572577
+    password: 123456
+#    password: Jkermeng.1234
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+  resources:
+
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static,classpath:/public/ #开放并设置静态资源根目录文件的访问权限
+
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 2048MB
+
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 10088 #自定义端口
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #告诉spring获取mapper/*.xml下的文件
+  type-aliases-package: cn.jk.demo.pojo #给mabatis装配实体类
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    local-cache-scope: statement
+#    cache-enabled: false
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+
+  thymeleaf:
+    cache: false
+
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  level:
+    cn.jk.demo.mapper: debug

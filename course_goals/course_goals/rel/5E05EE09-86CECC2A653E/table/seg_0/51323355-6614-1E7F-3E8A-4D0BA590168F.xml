@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="51323355-6614-1E7F-3E8A-4D0BA590168F" name="table_index_points">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="table_course_tc_id" id="172C75A6-58D6-2338-D318-9F0493599273">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C11B1798-8917-257F-E718-894F18F4C3FB" referredColumn="23819A81-2720-9B44-F875-3E3A7E9D09BE"/>
+</associations>
+</Column>
+<Column name="table_major_graduation_requirements_tmgr_id" id="F6771418-167D-0912-068F-21CAE8AB7750">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="207E8B8F-7409-5C0F-E254-43E3AEDC3E9F" referredColumn="465BAF67-1B04-97CC-788C-C63AE1B0DEC5"/>
+</associations>
+</Column>
+<Column name="tip_describe" id="1F6BE3B5-A973-C1E0-06EB-C511081BC2FA">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>DCCAD324-AB23-5C7C-F1D9-CCE788BC3570</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+</Column>
+<Column name="tip_weight_level" id="F44A332B-6BA8-7A4C-6FBC-8266D215BA56">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>DE9E16FB-9393-DAE7-2C65-B351C1137D40</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2</dataTypeSize>
+<ownDataTypeParameters>2,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+</Column>
+<Column name="tip_weight" id="062D6F12-883A-6DBA-F206-4965045B3CDF">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>F4806A98-5ACC-C79A-D11A-9AB14F7D4870</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8E168B35-60C9-A6BF-FA9E-366EB3187E31" name="table_index_points_PK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="172C75A6-58D6-2338-D318-9F0493599273"/>
+<colUsage columnID="F6771418-167D-0912-068F-21CAE8AB7750"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7764B6C6-F275-041A-7025-075B0DE129D3" name="table_index_points_table_course_FK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>AC5B5DE0-4459-39CC-D550-C76312D15226</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="172C75A6-58D6-2338-D318-9F0493599273"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4F01A31E-6A96-C3F0-44D9-D9E8D2EB43CC" name="table_index_points_table_major_graduation_requirements_FK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:44:32 UTC</createdTime>
+<generatorID>AC5B5DE0-4459-39CC-D550-C76312D15226</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F6771418-167D-0912-068F-21CAE8AB7750"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

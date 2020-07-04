@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="table_kp_index_points" directorySegmentName="seg_0" id="12AB0FC6-0371-B44F-299C-159A95AAA0F2">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:43:13 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>FE8DB645-CD07-79F8-2DAB-F52648499173</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>9E8DA2C6-966A-9FB2-D75C-E80878EFED96</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="course_goals" id="210215B2-BDF7-40E6-FB3D-8CEB8658C02E" version="3.5">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 12:15:04 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>210215B2-BDF7-40E6-FB3D-8CEB8658C02E</designId>
+</OSDM_Design>

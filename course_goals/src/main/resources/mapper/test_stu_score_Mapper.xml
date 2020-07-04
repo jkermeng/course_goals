@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Test_Stu_ScoreMapper">
+    <resultMap id="sts" type="Test_Stu_Score">
+        <id property="ttss_id" column="ttss_id"></id>
+        <result property="ttss_title" column="ttss_title"></result>
+        <result property="ttss_base_score" column="ttss_base_score"></result>
+        <result property="ttss_get_score" column="ttss_get_score"></result>
+        <association property="ttss_test_id" column="ttss_test_id" select="cn.jk.demo.mapper.Stu_TestMapper.selectById"
+                     javaType="Stu_Test"></association>
+    </resultMap>
+    <sql id="allValue">
+        ttss_id,ttss_title,ttss_base_score,ttss_get_score,ttss_test_id
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <!--    <select id="selectAll" resultMap="sts">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_test_stu_score-->
+    <!--    </select>-->
+    <!--    <select id="selectOneByKey" parameterType="" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_test_stu_score-->
+    <!--        <where>-->
+    <!--            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>-->
+    <!--            <if test="u_id!=null and u_id!=''">,u_id=#{u_id}</if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <select id="selectsByKey" parameterType="Test_Stu_Score" resultMap="sts">
+        select
+        <include refid="allValue"/>
+        from table_test_stu_score
+        <where>
+            <if test="ttss_id!=null and ttss_id!=''">ttss_id=#{ttss_id}</if>
+            <if test="ttss_title!=null and ttss_title!=''"><if test="ttss_id!=null and ttss_id!=''">and </if>ttss_title like #{ttss_title}</if>
+            <if test="ttss_base_score!=null and ttss_base_score!=''">and ttss_base_score=#{ttss_base_score}</if>
+            <if test="ttss_get_score!=null and ttss_get_score!=''">and ttss_get_score=#{ttss_get_score}</if>
+            <if test="ttss_test_id!=null and ttss_test_id!=''">
+                <if test="ttss_id!=null and ttss_id!='' or ttss_title!=null">and </if>
+
+                ttss_test_id=#{ttss_test_id.tst_id}
+            </if>
+        </where>
+    </select>
+    <!--    <select id="selectById" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_test_stu_score-->
+    <!--        where-->
+    <!--    </select>-->
+        <update id="update" parameterType="Test_Stu_Score">
+            update table_test_stu_score
+            <set>
+                <if test=" ttss_title!=null and  ttss_title!=''">ttss_title=#{ttss_title}</if>
+                <if test=" ttss_base_score!=null and  ttss_base_score!=''">,ttss_base_score=#{ttss_base_score}</if>
+                <if test=" ttss_get_score!=null and  ttss_get_score!=''">,ttss_get_score=#{ttss_get_score}</if>
+                <if test=" ttss_test_id!=null and  ttss_test_id!=''">,ttss_test_id=#{ttss_test_id.tst_id}</if>
+            </set>
+            where ttss_id = #{ttss_id}
+        </update>
+    <delete id="delete" parameterType="Test_Stu_Score">
+        delete
+        from table_test_stu_score
+        where
+        <if test="ttss_id!=null and ttss_id!=''">ttss_id=#{ttss_id}</if>
+        <if test="ttss_test_id!=null and ttss_test_id!=''">ttss_test_id=#{ttss_test_id.tst_id}</if>
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_test_stu_score-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="Test_Stu_Score">
+        insert into table_test_stu_score(ttss_title, ttss_base_score, ttss_get_score, ttss_test_id)
+        values (#{ttss_title}, #{ttss_base_score}, #{ttss_get_score}, #{ttss_test_id.tst_id})
+    </insert>
+</mapper>

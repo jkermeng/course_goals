@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F6209E6A-CF02-E396-78BB-E76703FABAF0" name="table_major_graduation_requirements">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:11:46 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="tmgr_id" id="FDED0C44-68DA-7344-21ED-BD9C0B4FD9F4">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:12:33 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tmgr_tile" id="32EE80DD-AC23-EE01-7247-21EFC7E4B6CD">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:12:45 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="describe" id="67437F3F-F91A-7869-8DD6-0F239B0723F8">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:13:01 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="AB314893-F2D8-539F-0EAA-1D9F9C972FDF" name="table_major_graduation_requirements PK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:12:44 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FDED0C44-68DA-7344-21ED-BD9C0B4FD9F4</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.FunsMapper">
+    <resultMap id="funs" type="Funs">
+        <id property="fun_Id" column="fun_Id"></id>
+        <result property="fun_Name" column="fun_Name"></result>
+        <result property="fun_Url" column="fun_Url"></result>
+        <result property="fun_Target" column="fun_Target"></result>
+    </resultMap>
+    <resultMap type="Funs" id="BaseResultMapJoinObj" extends="funs">
+        <association property="fun_Pid" column="fun_Pid" javaType="Funs" select="selectById"></association>
+    </resultMap>
+    <resultMap type="Funs" id="BaseResultMapJoinList" extends="BaseResultMapJoinObj">
+        <collection property="funsList" column="fun_Id" javaType="java.util.ArrayList"
+                    select="selectByPid"></collection>
+    </resultMap>
+    <sql id="allFunsValues">
+        fun_Id,fun_Name,fun_Url,fun_Target,fun_Pid
+    </sql>
+    <sql id="insertValues">
+        fun_Name,fun_Url,fun_Target,fun_Pid
+    </sql>
+    <select id="selectByRoleId" resultMap="BaseResultMapJoinList" parameterType="java.lang.Integer">
+        select
+        <include refid="allFunsValues"/>
+        from table_funs f LEFT JOIN table_permissions p on f.fun_Id=p.funs_id where p.role_id=#{pid}
+    </select>
+    <select id="selectById" resultMap="BaseResultMapJoinList">
+        select
+        <include refid="allFunsValues"/>
+        from table_funs
+        <where>
+            fun_Id =#{pid}
+        </where>
+    </select>
+    <select id="selectByPid" resultMap="funs">
+        select
+        <include refid="allFunsValues"/>
+        from table_funs
+        <where>
+            fun_Pid =#{pid}
+        </where>
+    </select>
+
+</mapper>

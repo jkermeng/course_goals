@@ -1,0 +1,86 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FE8DB645-CD07-79F8-2DAB-F52648499173" name="table_knowledge_points">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:05:30 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="tkp_id" id="E9217381-9424-40A9-AD98-B48BA2A12666">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:06:13 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tkp_title" id="07A6E2A1-872E-17ED-F9A7-7353B21D1614">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:06:43 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tkp_describe" id="538FB2B4-7106-EDB0-E79E-2D9AF3F29A52">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:06:55 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tc_id" id="F04A2587-3EB6-DCE8-0661-7FD07155F7B1">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:42:47 UTC</createdTime>
+<generatorID>BDD4A37B-F4F9-54AD-CC46-8E6C800ED681</generatorID>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<referedAttribute>F1FA1017-CD7F-A2D4-7E52-AF70EB1181B8</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="533BC1BB-1D2A-36F3-79A5-C630D14BDA82" name="table_knowledge_points PK">
+<createdBy>JKERmeng</createdBy>
+<createdTime>2020-05-13 13:07:27 UTC</createdTime>
+<ownerDesignName>course_goals</ownerDesignName>
+<engineerTo>
+<item key="5E05EE09-D562-BC1C-5B53-86CECC2A653E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>E9217381-9424-40A9-AD98-B48BA2A12666</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.UserMapper">
+    <resultMap id="user" type="cn.jk.demo.pojo.User">
+        <id column="u_id" property="u_id"></id>
+        <result column="u_name" property="u_name"></result>
+        <result column="u_nickname" property="u_nickname"></result>
+        <result column="u_password" property="u_password"></result>
+        <result column="u_rname" property="u_rname"></result>
+        <result column="u_tel" property="u_tel"></result>
+        <result column="u_email" property="u_email"></result>
+        <result column="u_sex" property="u_sex"></result>
+        <result column="u_birthday" property="u_birthday"></result>
+        <result column="u_adress" property="u_adress"></result>
+        <result column="u_personID" property="u_personID"></result>
+        <result column="u_picture" property="u_picture"></result>
+        <result column="u_m_tel" property="u_m_tel"></result>
+        <result column="u_fixed_tel" property="u_fixed_tel"></result>
+        <result column="u_nation" property="u_nation"></result>
+        <result column="u_poli_outlook" property="u_poli_outlook"></result>
+        <result column="u_native_place" property="u_native_place"></result>
+        <result column="u_religious_belief" property="u_religious_belief"></result>
+        <result column="CreateTime" property="CreateTime"></result>
+        <result column="UpdateTime" property="UpdateTime"></result>
+        <association column="role_id" property="role_id" javaType="Role"
+                     select="cn.jk.demo.mapper.RoleMapper.selectById"></association>
+    </resultMap>
+    <sql id="allValue">
+        u_id,u_name,u_nickname,u_password,u_rname,u_tel,u_email,u_sex,u_birthday,u_adress,u_personID,u_picture,u_m_tel,u_fixed_tel,u_nation,u_poli_outlook,u_native_place,u_religious_belief,CreateTime,UpdateTime,role_id
+    </sql>
+    <sql id="addValue">
+        u_name,u_nickname,u_password,u_rname,u_tel,u_email,u_sex,u_birthday,u_adress,u_personID,u_picture,u_m_tel,u_fixed_tel,u_nation,u_poli_outlook,u_native_place,u_religious_belief,CreateTime,UpdateTime,role_id
+    </sql>
+    <sql id="registerValue">
+        u_name,u_password,u_tel,u_nickname,u_rname,u_sex,u_birthday,CreateTime,UpdateTime,role_id
+    </sql>
+    <insert id="regist" parameterType="User">
+        insert into table_user (
+        role_id
+        <if test="u_name!=null and u_name!=''">,u_name</if>
+        <if test="u_email!=null and u_email!=''">,u_email</if>
+        <if test="u_name!=null and u_name!=''">,u_name</if>
+        <if test="u_password!=null and u_password!=''">,u_password</if>
+        <if test="u_tel!=null and u_tel!=''">, u_tel</if>
+        <if test="u_nickname!=null and u_nickname!=''">, u_nickname</if>
+        <if test="u_rname!=null and u_rname!=''">, u_rname</if>
+        <if test="u_sex!=null and u_sex!=''">, u_sex</if>
+        <if test="u_birthday!=null">, u_birthday</if>
+        <if test="CreateTime!=null">, CreateTime</if>
+        <if test="UpdateTime!=null">, UpdateTime</if>
+        ) values
+        (
+        #{role_id.role_Id}
+        <if test="u_name!=null and u_name!=''">,#{u_name}</if>
+        <if test="u_email!=null and u_email!=''">,#{u_email}</if>
+        <if test="u_password!=null and u_password!=''">,#{u_password}</if>
+        <if test="u_tel!=null and u_tel!=''">,#{u_tel}</if>
+        <if test="u_nickname!=null and u_nickname!=''">,#{u_nickname}</if>
+        <if test="u_rname!=null and u_rname!=''">,#{u_rname}</if>
+        <if test="u_sex!=null and u_sex!=''">,#{u_sex}</if>
+        <if test="u_birthday!=null">,#{u_birthday}</if>
+        <if test="CreateTime!=null">,#{CreateTime}</if>
+        <if test="UpdateTime!=null">,#{UpdateTime}</if>
+        )
+    </insert>
+    <select id="selectAll" resultMap="user">
+        select
+        <include refid="allValue"></include>
+        from table_user
+    </select>
+    <select id="selectByKey" parameterType="User" resultMap="user">
+        select
+        <include refid="allValue"></include>
+        from table_user
+        <where>
+            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>
+            <if test="u_name!=null and u_name!=''"><if test="u_id!=null and u_id!=''">and </if>u_name=#{u_name}
+            </if>
+            <if test="u_nickname!=null and u_nickname!=''">and u_nickname=#{u_nickname}</if>
+            <if test="u_password!=null and u_password!=''">and u_password=#{u_password}</if>
+            <if test="u_rname!=null and u_rname!=''">and u_rname=#{u_rname}</if>
+            <if test="u_tel!=null and u_tel!=''">
+                <if test="u_name!=null or u_name!=''">and </if>
+                u_tel=#{u_tel}
+            </if>
+            <if test="u_email!=null and u_email!=''"><if test="u_id!=null and u_id!='' and u_name!=null and u_name!=''">and </if> u_email=#{u_email}</if>
+            <if test="u_sex!=null and u_sex!=''">and u_sex=#{u_sex}</if>
+            <if test="u_birthday!=null">and u_birthday=#{u_birthday}</if>
+            <if test="u_adress!=null and u_adress!=''">and u_adress=#{u_adress}</if>
+            <if test="u_personID!=null and u_personID!=''">and u_personID=#{u_personID}</if>
+            <if test="u_picture!=null and u_picture!=''">and u_picture=#{u_picture}</if>
+            <if test="u_m_tel!=null and u_m_tel!=''"><if test="u_id!=null and u_id!='' and u_name!=null and u_name!='' and u_email!=null and u_email!=''">and </if> u_m_tel=#{u_m_tel}</if>
+            <if test="u_fixed_tel!=null and u_fixed_tel!=''">and u_fixed_tel=#{u_fixed_tel}</if>
+            <if test="u_nation!=null and u_nation!=''">and u_nation=#{u_nation}</if>
+            <if test="u_poli_outlook!=null and u_poli_outlook!=''">and u_poli_outlook=#{u_poli_outlook}</if>
+            <if test="u_native_place!=null and u_native_place!=''">and u_native_place=#{u_native_place}</if>
+            <if test="u_religious_belief!=null and u_religious_belief!=''">and
+                u_religious_belief=#{u_religious_belief}
+            </if>
+            <if test="CreateTime!=null ">and CreateTime=#{CreateTime}</if>
+            <if test="UpdateTime!=null">and UpdateTime=#{UpdateTime}</if>
+            <if test="role_id!=null ">
+                <if test="u_id!=null or u_id!=''">and </if>
+                role_id=#{role_id.role_Id}
+            </if>
+        </where>
+    </select>
+    <select id="selectOneByKey" parameterType="User" resultMap="user">
+        select
+        <include refid="allValue"></include>
+        from table_user
+        <where>
+            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>
+            <if test="u_name!=null and u_name!=''"><if test="u_id!=null and u_id!=''">and </if>u_name=#{u_name}
+            </if>
+            <if test="u_nickname!=null and u_nickname!=''">and u_nickname=#{u_nickname}</if>
+            <if test="u_password!=null and u_password!=''">and u_password=#{u_password}</if>
+            <if test="u_rname!=null and u_rname!=''">and u_rname=#{u_rname}</if>
+            <if test="u_tel!=null and u_tel!=''">
+                <if test="u_name!=null or u_name!=''">and </if>
+                u_tel=#{u_tel}
+            </if>
+            <if test="u_email!=null and u_email!=''"><if test="u_id!=null and u_id!='' and u_name!=null and u_name!=''">and </if> u_email=#{u_email}</if>
+            <if test="u_sex!=null and u_sex!=''">and u_sex=#{u_sex}</if>
+            <if test="u_birthday!=null">and u_birthday=#{u_birthday}</if>
+            <if test="u_adress!=null and u_adress!=''">and u_adress=#{u_adress}</if>
+            <if test="u_personID!=null and u_personID!=''">and u_personID=#{u_personID}</if>
+            <if test="u_picture!=null and u_picture!=''">and u_picture=#{u_picture}</if>
+            <if test="u_m_tel!=null and u_m_tel!=''"><if test="u_id!=null and u_id!='' and u_name!=null and u_name!='' and u_email!=null and u_email!=''">and </if> u_m_tel=#{u_m_tel}</if>
+            <if test="u_fixed_tel!=null and u_fixed_tel!=''">and u_fixed_tel=#{u_fixed_tel}</if>
+            <if test="u_nation!=null and u_nation!=''">and u_nation=#{u_nation}</if>
+            <if test="u_poli_outlook!=null and u_poli_outlook!=''">and u_poli_outlook=#{u_poli_outlook}</if>
+            <if test="u_native_place!=null and u_native_place!=''">and u_native_place=#{u_native_place}</if>
+            <if test="u_religious_belief!=null and u_religious_belief!=''">and
+                u_religious_belief=#{u_religious_belief}
+            </if>
+            <if test="CreateTime!=null ">and CreateTime=#{CreateTime}</if>
+            <if test="UpdateTime!=null">and UpdateTime=#{UpdateTime}</if>
+            <if test="role_id!=null ">
+                <if test="u_id!=null or u_id!=''">and </if>
+                role_id=#{role_id.role_Id}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="user">
+        select
+        <include refid="allValue"></include>
+        from table_user
+        where u_id=#{id}
+    </select>
+    <select id="selectsById" parameterType="java.lang.Integer" resultMap="user">
+        select
+        <include refid="allValue"></include>
+        from table_user
+        where u_id=#{id}
+    </select>
+    <update id="update" parameterType="User">
+        update table_user
+        <set>
+            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>
+            <if test="u_name!=null and u_name!=''">,u_name=#{u_name}</if>
+            <if test="u_nickname!=null and u_nickname!=''">, u_nickname=#{u_nickname}</if>
+            <if test="u_password!=null and u_password!=''">, u_password=#{u_password}</if>
+            <if test="u_rname!=null and u_rname!=''">, u_rname=#{u_rname}</if>
+            <if test="u_tel!=null and u_tel!=''">
+                <if test="u_name!=null or u_name!=''">,</if>
+                u_tel=#{u_tel}
+            </if>
+            <if test="u_email!=null and u_email!=''">, u_email=#{u_email}</if>
+            <if test="u_sex!=null and u_sex!=''">, u_sex=#{u_sex}</if>
+            <if test="u_birthday!=null">, u_birthday=#{u_birthday}</if>
+            <if test="u_adress!=null and u_adress!=''">, u_adress=#{u_adress}</if>
+            <if test="u_personID!=null and u_personID!=''">, u_personID=#{u_personID}</if>
+            <if test="u_picture!=null and u_picture!=''">, u_picture=#{u_picture}</if>
+            <if test="u_m_tel!=null and u_m_tel!=''">, u_m_tel=#{u_m_tel}</if>
+            <if test="u_fixed_tel!=null and u_fixed_tel!=''">, u_fixed_tel=#{u_fixed_tel}</if>
+            <if test="u_nation!=null and u_nation!=''">, u_nation=#{u_nation}</if>
+            <if test="u_poli_outlook!=null and u_poli_outlook!=''">, u_poli_outlook=#{u_poli_outlook}</if>
+            <if test="u_native_place!=null and u_native_place!=''">, u_native_place=#{u_native_place}</if>
+            <if test="u_religious_belief!=null and u_religious_belief!=''">, u_religious_belief=#{u_religious_belief}
+            </if>
+            <if test="CreateTime!=null ">, CreateTime=#{CreateTime}</if>
+            <if test="UpdateTime!=null">, UpdateTime=#{UpdateTime}</if>
+            <if test="role_id!=null ">, role_id=#{role_id.role_Id}</if>
+        </set>
+        where u_id=#{u_id}
+    </update>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete
+        from table_user
+        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Knowledge_PointsMapper">
+    <resultMap id="kp" type="Knowledge_Points">
+        <id property="tkp_id" column="tkp_id"></id>
+        <result property="tkp_title" column="tkp_title"></result>
+        <result property="tkp_describe" column="tkp_describe"></result>
+        <result property="tkp_part" column="tkp_part"></result>
+        <association property="table_course_tc_id" column="table_course_tc_id"
+                     select="cn.jk.demo.mapper.CourseMapper.selectById" javaType="Course"></association>
+    </resultMap>
+    <sql id="allValue">
+        tkp_id,tkp_title,tkp_describe,table_course_tc_id,tkp_part
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <select id="selectAll" resultMap="kp">
+        select
+        <include refid="allValue"/>
+        from table_knowledge_points
+    </select>
+    <select id="selectOneByKey" parameterType="Knowledge_Points" resultMap="kp">
+        select
+        <include refid="allValue"/>
+        from table_knowledge_points
+        <where>
+            <if test="tkp_id!=null and tkp_id!=''">tkp_id=#{tkp_id}</if>
+            <if test="tkp_title!=null and tkp_title!=''">and tkp_title=#{tkp_title}</if>
+            <if test="tkp_describe!=null and tkp_describe!=''">and tkp_describe=#{tkp_describe}</if>
+            <if test="table_course_tc_id!=null and table_course_tc_id!=''">
+                <if test="tkp_title!=null and tkp_title!=''">and</if>
+                table_course_tc_id=#{table_course_tc_id.tc_id}
+            </if>
+            <if test="tkp_title!=null and tkp_title!=''">and tkp_title=#{tkp_title}</if>
+        </where>
+    </select>
+    <select id="selectsByKey" parameterType="Knowledge_Points" resultMap="kp">
+        select
+        <include refid="allValue"/>
+        from table_knowledge_points
+        <where>
+            <if test="tkp_id!=null and tkp_id!=''">tkp_id=#{tkp_id}</if>
+            <if test="tkp_title!=null and tkp_title!=''">and tkp_title=#{tkp_title}</if>
+            <if test="tkp_describe!=null and tkp_describe!=''">and tkp_describe=#{tkp_describe}</if>
+            <if test="table_course_tc_id!=null and table_course_tc_id!=''">
+                <if test="tkp_id!=null and tkp_id!=''">and</if>
+                table_course_tc_id=#{table_course_tc_id.tc_id}
+            </if>
+            <if test="tkp_title!=null and tkp_title!=''">and tkp_title=#{tkp_title}</if>
+        </where>
+    </select>
+    <select id="selectById" resultMap="kp">
+        select
+        <include refid="allValue"/>
+        from table_knowledge_points
+        where tkp_id=#{id}
+    </select>
+    <update id="update" parameterType="Knowledge_Points">
+        update table_knowledge_points
+        <set>
+            <if test=" tkp_id!=null and tkp_id!=''">tkp_id=#{tkp_id}</if>
+            <if test=" tkp_title!=null and tkp_title!=''">,tkp_title=#{tkp_title}</if>
+            <if test=" tkp_describe!=null and tkp_describe!=''">,tkp_describe=#{tkp_describe}</if>
+            <if test=" table_course_tc_id!=null and table_course_tc_id!=''">
+                ,table_course_tc_id=#{table_course_tc_id.tc_id}
+            </if>
+            <if test=" tkp_part!=null and tkp_part!=''">,tkp_part=#{tkp_part}</if>
+        </set>
+        where tkp_id=#{tkp_id}
+    </update>
+    <delete id="delete" parameterType="Knowledge_Points">
+
+        DELETE t1,t2
+        FROM table_knowledge_points t1
+                 LEFT JOIN table_eq_kp t2 ON t1.`tkp_id` = t2.`teqkp_kp_id`
+        WHERE t1.`tkp_id` = #{tkp_id}
+    </delete>
+
+
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_knowledge_points-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="Knowledge_Points">
+        insert into table_knowledge_points(
+        <if test=" tkp_title!=null and tkp_title!=''">tkp_title</if>
+        <if test=" tkp_describe!=null and tkp_describe!=''">,tkp_describe</if>
+        <if test=" table_course_tc_id!=null and table_course_tc_id!=''">,table_course_tc_id</if>
+        <if test=" tkp_part!=null and tkp_part!=''">,tkp_part</if>
+        )
+        values (
+        <if test=" tkp_title!=null and tkp_title!=''">#{tkp_title}</if>
+        <if test=" tkp_describe!=null and tkp_describe!=''">,#{tkp_describe}</if>
+        <if test=" table_course_tc_id!=null and table_course_tc_id!=''">,#{table_course_tc_id.tc_id}</if>
+        <if test=" tkp_part!=null and tkp_part!=''">,#{tkp_part}</if>
+        )
+    </insert>
+</mapper>

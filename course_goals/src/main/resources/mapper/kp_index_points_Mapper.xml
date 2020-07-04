@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.KP_index_PointsMapper">
+    <resultMap id="kp_ip" type="KP_index_Points">
+        <id property="tip_kp_id" column="tip_kp_id"></id>
+        <result property="table_part" column="table_part"></result>
+        <association property="table_kp_index_points_tkp_id" column="table_kp_index_points_tkp_id"
+                     select="cn.jk.demo.mapper.Knowledge_PointsMapper.selectById"
+                     javaType="Knowledge_Points"></association>
+        <association property="table_major_g" column="table_major_g"
+                     select="cn.jk.demo.mapper.Major_graduation_requirementsMapper.selectById"
+                     javaType="Major_graduation_requirements"></association>
+    </resultMap>
+    <sql id="allValue">
+        tip_kp_id,table_knowledge_points_tkp_id,table_major_g,table_part
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <!--    <select id="selectAll" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_kp_index_points-->
+    <!--    </select>-->
+    <!--    <select id="selectOneByKey" parameterType="" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_kp_index_points-->
+    <!--        <where>-->
+    <!--            <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>-->
+    <!--            <if test="u_id!=null and u_id!=''">,u_id=#{u_id}</if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <select id="selectsByKey" parameterType="KP_index_Points" resultMap="kp_ip">
+        select
+        <include refid="allValue"/>
+        from table_kp_index_points
+        <where>
+            <if test="tip_kp_id!=null and tip_kp_id!=''">tip_kp_id=#{tip_kp_id}</if>
+            <if test="table_knowledge_points_tkp_id!=null and table_knowledge_points_tkp_id!=''">
+                <if test="tip_kp_id!=null and tip_kp_id!=''">and</if>
+                table_knowledge_points_tkp_id=#{table_knowledge_points_tkp_id.tkp_id}
+            </if>
+            <if test="table_major_g!=null and table_major_g!=''">and table_major_g=#{table_major_g.tmgr_id}</if>
+            <if test="table_part!=null and table_part!=''">and table_part=#{table_part}</if>
+        </where>
+    </select>
+    <!--    <select id="selectById" resultMap="">-->
+    <!--        select-->
+    <!--        <include refid="allValue"/>-->
+    <!--        from table_kp_index_points-->
+    <!--        where-->
+    <!--    </select>-->
+    <select id="selectsBytkp_id" resultMap="kp_ip">
+        select
+        <include refid="allValue"/>
+        from table_kp_index_points
+        where table_knowledge_points_tkp_id=#{id}
+    </select>
+    <!--    <update id="update" parameterType="">-->
+    <!--        update table_kp_index_points-->
+    <!--        <set>-->
+    <!--            <if test=" !=null and  !=''">xxx=#{}</if>-->
+    <!--            <if test=" !=null and  !=''">,xxx=#{}</if>-->
+
+    <!--        </set>-->
+    <!--        where-->
+    <!--    </update>-->
+    <delete id="delete" parameterType="KP_index_Points">
+        delete
+        from table_kp_index_points
+        where
+        <if test="tip_kp_id!=null and tip_kp_id!=''">tip_kp_id=#{tip_kp_id}</if>
+        <if test="table_knowledge_points_tkp_id!=null and table_knowledge_points_tkp_id!=''">
+            table_knowledge_points_tkp_id=#{table_knowledge_points_tkp_id.tkp_id}
+        </if>
+        <if test="table_major_g!=null and table_major_g!=''">table_major_g=#{table_major_g.tmgr_id}</if>
+        <if test="table_part!=null and table_part!=''">table_part=#{table_part}</if>
+    </delete>
+    <delete id="delete2" parameterType="KP_index_Points">
+        delete
+        from table_kp_index_points
+        where
+        <if test="tip_kp_id!=null and tip_kp_id!=''">tip_kp_id=#{tip_kp_id}</if>
+        <if test="table_knowledge_points_tkp_id!=null and table_knowledge_points_tkp_id!=''">
+            table_knowledge_points_tkp_id=#{table_knowledge_points_tkp_id.tkp_id}
+        </if>
+        <if test="table_major_g!=null and table_major_g!=''">and table_major_g=#{table_major_g.tmgr_id}</if>
+        <if test="table_part!=null and table_part!=''">and table_part=#{table_part}</if>
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_kp_index_points-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="KP_index_Points">
+        insert into table_kp_index_points(
+        <if test="table_knowledge_points_tkp_id!=null and table_knowledge_points_tkp_id!=''">
+            table_knowledge_points_tkp_id
+        </if>
+        <if test="table_major_g!=null and table_major_g!=''">, table_major_g</if>
+        <if test="table_part!=null and table_part!=''">, table_part</if>)
+        values (
+        <if test="table_knowledge_points_tkp_id!=null and table_knowledge_points_tkp_id!=''">
+            #{table_knowledge_points_tkp_id.tkp_id}
+        </if>
+        <if test="table_major_g!=null and table_major_g!=''">, #{table_major_g.tmgr_id}</if>
+        <if test="table_part!=null and table_part!=''">, #{table_part}</if>
+        )
+    </insert>
+</mapper>

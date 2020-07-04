@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.CourseMapper">
+    <resultMap id="course" type="Course">
+        <id property="tc_id" column="tc_id"></id>
+        <result property="tc_name" column="tc_name"></result>
+        <result property="" column=""></result>
+        <result property="tc_showid" column="tc_showid"></result>
+        <result property="tc_score" column="tc_score"></result>
+        <result property="tc_describe" column="tc_describe"></result>
+        <result property="tc_usual_performance" column="tc_usual_performance"></result>
+        <result property="tc_experimental_results" column="tc_experimental_results"></result>
+        <result property="tc_interim_results" column="tc_interim_results"></result>
+        <result property="tc_final_exam" column="tc_final_exam"></result>
+        <result property="tc_report_results" column="tc_report_results"></result>
+        <result property="tc_training_results" column="tc_training_results"></result>
+        <result property="tc_extracurricular_performance" column="tc_extracurricular_performance"></result>
+        <association property="tc_teacher" column="tc_teacher" select="cn.jk.demo.mapper.UserMapper.selectById"
+                     javaType="User"></association>
+    </resultMap>
+    <sql id="allValue">
+        tc_id,tc_name,tc_teacher,tc_showid,tc_score,tc_describe,tc_usual_performance,tc_experimental_results,tc_interim_results,tc_final_exam,tc_report_results,tc_training_results,tc_extracurricular_performance
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+    <select id="selectAll" resultMap="course">
+        select
+        <include refid="allValue"/>
+        from table_course
+    </select>
+    <!--    <select id="selectOneByKey" parameterType="" resultMap="">-->
+    <!--                select-->
+    <!--                <include refid="allValue"/>-->
+    <!--                from table_course-->
+    <!--                <where>-->
+    <!--                    <if test="u_id!=null and u_id!=''">u_id=#{u_id}</if>-->
+    <!--                    <if test="u_id!=null and u_id!=''">,u_id=#{u_id}</if>-->
+    <!--                </where>-->
+    <!--    </select>-->
+    <!--    <select id="selectsByKey" parameterType="Course" resultMap="course"></select>-->
+    <select id="selectById" resultMap="course">
+        select
+        <include refid="allValue"/>
+        from table_course
+        where tc_id=#{id}
+    </select>
+    <update id="update" parameterType="Course">
+        update table_course
+        <set>
+            <if test=" tc_id!=null and  tc_id!=''">tc_id=#{tc_id}</if>
+            <if test=" tc_name!=null and  tc_name!=''">,tc_name=#{tc_name}</if>
+            <if test=" tc_teacher!=null and  tc_teacher!=''">,tc_teacher=#{tc_teacher.u_id}</if>
+            <if test=" tc_showid!=null and  tc_showid!=''">,tc_showid=#{tc_showid}</if>
+            <if test=" tc_score!=null and  tc_score!=''">,tc_score=#{tc_score}</if>
+            <if test=" tc_describe!=null and  tc_describe!=''">,tc_describe=#{tc_describe}</if>
+            <if test=" tc_usual_performance!=null and  tc_usual_performance!=''">
+                ,tc_usual_performance=#{tc_usual_performance}
+            </if>
+            <if test=" tc_experimental_results!=null and  tc_experimental_results!=''">
+                ,tc_experimental_results=#{tc_experimental_results}
+            </if>
+            <if test=" tc_interim_results!=null and  tc_interim_results!=''">,tc_interim_results=#{tc_interim_results}
+            </if>
+            <if test=" tc_final_exam!=null and  tc_final_exam!=''">,tc_final_exam=#{tc_final_exam}</if>
+            <if test=" tc_report_results!=null and  tc_report_results!=''">,tc_report_results=#{tc_report_results}</if>
+            <if test=" tc_training_results!=null and  tc_training_results!=''">
+                ,tc_training_results=#{tc_training_results}
+            </if>
+            <if test=" tc_extracurricular_performance!=null and  tc_extracurricular_performance!=''">
+                ,tc_extracurricular_performance=#{tc_extracurricular_performance}
+            </if>
+        </set>
+        where tc_id =#{tc_id}
+    </update>
+    <delete id="delete" parameterType="Course">
+        DELETE t1,t2,t3,t4
+        FROM table_course t1
+                 LEFT JOIN table_knowledge_points t2 ON t1.tc_id = t2.table_course_tc_id
+                 LEFT JOIN table_test t3 ON t1.tc_id = t3.tt_course
+                 LEFT JOIN table_index_points t4 on t1.tc_id = t4.table_course_tc_id
+        where t1.tc_id = #{tc_id}
+
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--                delete-->
+    <!--                from table_course-->
+    <!--                <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--                    #{id}-->
+    <!--                </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="Course">
+        insert into table_course(
+        <if test=" tc_name!=null and tc_name!=''">tc_name</if>
+        <if test=" tc_teacher!=null and tc_teacher!=''">,tc_teacher</if>
+        <if test=" tc_showid!=null and tc_showid!=''">,tc_showid</if>
+        <if test=" tc_score!=null and tc_score!=''">,tc_score</if>
+        <if test=" tc_describe!=null and tc_describe!=''">,tc_describe</if>
+        <if test=" tc_usual_performance!=null and tc_usual_performance!=''">,tc_usual_performance</if>
+        <if test=" tc_experimental_results!=null and tc_experimental_results!=''">,tc_experimental_results</if>
+        <if test=" tc_interim_results!=null and tc_interim_results!=''">,tc_interim_results</if>
+        <if test=" tc_final_exam!=null and tc_final_exam!=''">,tc_final_exam</if>
+        <if test=" tc_report_results!=null and tc_report_results!=''">,tc_report_results</if>
+        <if test=" tc_training_results!=null and tc_training_results!=''">,tc_training_results</if>
+        <if test=" tc_extracurricular_performance!=null and tc_extracurricular_performance!=''">
+            ,tc_extracurricular_performance</if>)
+        values (
+        <if test=" tc_name!=null and tc_name!=''">#{tc_name}</if>
+        <if test=" tc_teacher!=null and tc_teacher!=''">,#{tc_teacher.u_id}</if>
+        <if test=" tc_showid!=null and tc_showid!=''">,#{tc_showid}</if>
+        <if test=" tc_score!=null and tc_score!=''">,#{tc_score}</if>
+        <if test=" tc_describe!=null and tc_describe!=''">,#{tc_describe}</if>
+        <if test=" tc_usual_performance!=null and tc_usual_performance!=''">,#{tc_usual_performance}</if>
+        <if test=" tc_experimental_results!=null and tc_experimental_results!=''">,#{tc_experimental_results}</if>
+        <if test=" tc_interim_results!=null and tc_interim_results!=''">,#{tc_interim_results}</if>
+        <if test=" tc_final_exam!=null and tc_final_exam!=''">,#{tc_final_exam}</if>
+        <if test=" tc_report_results!=null and tc_report_results!=''">,#{tc_report_results}</if>
+        <if test=" tc_training_results!=null and tc_training_results!=''">,#{tc_training_results}</if>
+        <if test=" tc_extracurricular_performance!=null and tc_extracurricular_performance!=''">
+            ,#{tc_extracurricular_performance}
+        </if>
+        )
+    </insert>
+</mapper>

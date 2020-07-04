@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jk.demo.mapper.Stu_TestMapper">
+    <resultMap id="stu_t" type="Stu_Test">
+        <id property="tst_id" column="tst_id"></id>
+        <result property="tst_test_name" column="tst_test_name"></result>
+        <result property="tst_term" column="tst_term"></result>
+        <result property="tst_test_type" column="tst_test_type"></result>
+        <result property="tst_test_second_test" column="tst_test_second_test"></result>
+        <result property="tst_upload" column="tst_upload"></result>
+        <association property="tst_teacher" column="tst_teacher" select="cn.jk.demo.mapper.UserMapper.selectById"
+                     javaType="User"></association>
+        <association property="tst_stuid" column="tst_stuid" select="cn.jk.demo.mapper.UserMapper.selectById"
+                     javaType="User"></association>
+        <association property="tst_test_id" column="tst_test_id" select="cn.jk.demo.mapper.TestMapper.selectById"
+                     javaType="Test"></association>
+    </resultMap>
+    <sql id="allValue">
+        tst_id,tst_test_name,tst_term,tst_test_type,tst_test_second_test,tst_teacher,tst_upload,tst_stuid,tst_test_id
+    </sql>
+    <sql id="addValue">
+
+    </sql>
+        <select id="selectAll" resultMap="stu_t">
+            select
+            <include refid="allValue"/>
+            from table_stu_test
+        </select>
+    <select id="selectOneByKey" parameterType="Stu_Test" resultMap="stu_t">
+        select
+        <include refid="allValue"/>
+        from table_stu_test
+        <where>
+            <if test="tst_test_name!=null and tst_test_name!=''">tst_test_name=#{tst_test_name}</if>
+            <if test="tst_term!=null and tst_term!=''">and tst_term=#{tst_term}</if>
+            <if test="tst_test_type!=null and tst_test_type!=''">and tst_test_type=#{tst_test_type}</if>
+            <if test="tst_test_second_test!=null and tst_test_second_test!=''">and
+                tst_test_second_test=#{tst_test_second_test}
+            </if>
+            <if test="tst_teacher!=null and tst_teacher!=''">
+                and tst_teacher=#{tst_teacher.u_id}
+            </if>
+            <if test="tst_upload!=null">and tst_upload=#{tst_upload}</if>
+            <if test="tst_stuid!=null and tst_stuid!=''">and tst_stuid=#{tst_stuid.u_id}</if>
+            <if test="tst_test_id!=null and tst_test_id!=''">
+                and tst_test_id=#{tst_test_id.tt_id}
+            </if>
+        </where>
+    </select>
+    <select id="selectsByKey" parameterType="Stu_Test" resultMap="stu_t">
+        select
+        <include refid="allValue"/>
+        from table_stu_test
+        <where>
+            <if test="tst_id!=null and tst_id!=''">tst_id=#{tst_id}</if>
+            <if test="tst_test_name!=null and tst_test_name!=''">and tst_test_name=#{tst_test_name}</if>
+            <if test="tst_term!=null and tst_term!=''">and tst_term=#{tst_term}</if>
+            <if test="tst_test_type!=null and tst_test_type!=''">and tst_test_type=#{tst_test_type}</if>
+            <if test="tst_test_second_test!=null and tst_test_second_test!=''">and
+                tst_test_second_test=#{tst_test_second_test}
+            </if>
+            <if test="tst_teacher!=null and tst_teacher!=''">
+                <if test="tst_id!=null and tst_id!=''">and</if>
+                tst_teacher=#{tst_teacher.u_id}
+            </if>
+            <if test="tst_upload!=null">and tst_upload=#{tst_upload}</if>
+            <if test="tst_stuid!=null and tst_stuid!=''">and tst_stuid=#{tst_stuid.u_id}</if>
+            <if test="tst_test_id!=null and tst_test_id!=''">
+                <if test="tst_id!=null and tst_id!=''">and</if>
+                tst_test_id=#{tst_test_id.tt_id}
+            </if>
+
+        </where>
+    </select>
+    <select id="selectById" resultMap="stu_t">
+        select
+        <include refid="allValue"/>
+        from table_stu_test
+        where tst_id=#{tst_id}
+    </select>
+    <select id="selectByStuId" resultMap="stu_t">
+        select
+        <include refid="allValue"/>
+        from table_stu_test
+        where tst_stuid=#{id}
+    </select>
+    <update id="update" parameterType="Stu_Test">
+        update table_stu_test
+        <set>
+            <if test=" tst_id!=null and  tst_id!=''">tst_id=#{tst_id}</if>
+            <if test=" tst_test_name!=null and  tst_test_name!=''">,tst_test_name=#{tst_test_name}</if>
+            <if test=" tst_term!=null and  tst_term!=''">,tst_term=#{tst_term}</if>
+            <if test=" tst_test_type!=null and  tst_test_type!=''">,tst_test_type=#{tst_test_type}</if>
+            <if test=" tst_test_second_test!=null and  tst_test_second_test!=''">,tst_test_second_test=#{tst_test_second_test}</if>
+        </set>
+        where tst_id=#{tst_id}
+    </update>
+    <delete id="delete" parameterType="Stu_Test">
+        delete
+        from table_stu_test
+        where
+        <if test="tst_id!=null and tst_id!=''">tst_id=#{tst_id}</if>
+        <if test="tst_test_id!=null and tst_test_id!=''">tst_test_id=#{tst_test_id.tt_id}</if>
+
+    </delete>
+    <!--    <delete id="deleteByList" parameterType="java.util.List">-->
+    <!--        delete-->
+    <!--        from table_stu_test-->
+    <!--        <foreach collection="list" open="where u_id in (" item="id" close=")" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--    </delete>-->
+    <insert id="insert" parameterType="Stu_Test">
+        insert into table_stu_test(tst_test_name, tst_term, tst_test_type, tst_test_second_test, tst_teacher,
+                                   tst_upload, tst_stuid, tst_test_id)
+        values (#{tst_test_name}, #{tst_term}, #{tst_test_type}, #{tst_test_second_test}, #{tst_teacher.u_id},
+                #{tst_upload},
+                #{tst_stuid.u_id}, #{tst_test_id.tt_id})
+    </insert>
+</mapper>
